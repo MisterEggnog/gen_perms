@@ -1,6 +1,6 @@
 
-mod gen_perm;
+mod lib;
 
 fn main() {
-	gen_perm::cal_perms();
+	lib::cal_perms();
 }

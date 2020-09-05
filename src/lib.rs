@@ -1,5 +1,5 @@
 
-use std::collections::BTreeSet;
+use std::collections::HashSet;
 use rand::prelude::*;
 use rand::seq::SliceRandom;
 use unicode_segmentation::UnicodeSegmentation;
@@ -26,14 +26,15 @@ fn calculate(s: &str) {
 	let mut rand = thread_rng();
 
 	let perm_num = (1..=group.len()).product();
-	let mut permutations = BTreeSet::new();
+	let mut permutations = HashSet::new();
 
 	while permutations.len() != perm_num {
 		group.shuffle(&mut rand);
-		permutations.insert(group.iter().map(|s| *s).collect::<String>());
-	}
-	
-	for permutation in permutations {
-		println!("{}", permutation);
+		let permut = group.iter().map(|s| *s).collect::<String>();
+
+		if !permutations.contains(&permut) {
+			println!("{}", permut);
+			permutations.insert(permut);
+		}
 	}
 }

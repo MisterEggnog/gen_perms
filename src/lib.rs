@@ -1,5 +1,5 @@
 
-use std::collections::HashSet;
+use std::collections::{HashSet, HashMap};
 use rand::prelude::*;
 use rand::seq::SliceRandom;
 use unicode_segmentation::UnicodeSegmentation;
@@ -13,8 +13,7 @@ pub fn cal_perms() {
 			return;
 		}
 		calculate(&s);
-	}
-	else {
+	} else {
 		println!("Usage `{} str`", std::env::args().nth(0).unwrap());
 		println!("Pass --help for more info");
 		return;
@@ -43,8 +42,25 @@ fn factorial(n: usize) -> usize {
 	(1..=n).product()
 }
 
-fn multinomial(s: &[&str]) -> usize {
-	let top = factorial(s.len());
-	let bottom = 1;
+fn multinomial(strs: &[&str]) -> usize {
+	let top = factorial(strs.len());
+	let bottom: usize = {
+		let mut counts = HashMap::new();
+		for grph in strs {
+			*counts.entry(grph).or_insert(0) += 1;
+		}
+		counts.iter().map(|c| factorial(*c.1)).product()
+	};
 	top / bottom
+}
+
+#[cfg(test)]
+mod test {
+	use super::*;
+
+	#[test]
+	fn multinomial_is_correct() {
+		let word = UnicodeSegmentation::graphemes("mississippi", true).collect::<Vec<&str>>();
+		assert_eq!(multinomial(&word), 34650);
+	}
 }

@@ -25,7 +25,7 @@ fn calculate(s: &str) {
 	let mut group = UnicodeSegmentation::graphemes(s, true).collect::<Vec<&str>>();
 	let mut rand = thread_rng();
 
-	let perm_num = (1..=group.len()).product();
+	let perm_num = factorial(group.len());
 	let mut permutations = HashSet::new();
 
 	while permutations.len() != perm_num {
@@ -37,4 +37,14 @@ fn calculate(s: &str) {
 			permutations.insert(permut);
 		}
 	}
+}
+
+fn factorial(n: usize) -> usize {
+	(1..=n).product()
+}
+
+fn multinomial(s: &[&str]) -> usize {
+	let top = factorial(s.len());
+	let bottom = 1;
+	top / bottom
 }

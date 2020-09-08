@@ -1,5 +1,5 @@
 [package]
-name = "gen_permutations"
+name = "gen_perms"
 version = "0.1.0"
 authors = ["MisterEggnog <12803156+MisterEggnog@users.noreply.github.com>"]
 edition = "2018"

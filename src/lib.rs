@@ -14,9 +14,8 @@ pub fn cal_perms() {
 		}
 		calculate(&s);
 	} else {
-		println!("Usage `{} str`", std::env::args().nth(0).unwrap());
+		println!("Usage `{} str`", std::env::args().next().unwrap());
 		println!("Pass --help for more info");
-		return;
 	}
 }
 
@@ -29,7 +28,7 @@ fn calculate(s: &str) {
 
 	while permutations.len() != perm_num {
 		group.shuffle(&mut rand);
-		let permut = group.iter().map(|s| *s).collect::<String>();
+		let permut = group.iter().copied().collect::<String>();
 
 		if !permutations.contains(&permut) {
 			println!("{}", permut);

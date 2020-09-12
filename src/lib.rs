@@ -1,4 +1,4 @@
-
+use std::io::{self, Write, Result};
 use std::collections::{HashSet, HashMap};
 use rand::prelude::*;
 use rand::seq::SliceRandom;
@@ -12,14 +12,16 @@ pub fn cal_perms() {
 			println!("Note, currently all characters must be distinct.");
 			return;
 		}
-		calculate(&s);
+		if let Err(_e) = calculate(&s, &mut io::stdout()) {
+			// It is not an error if the stdout is closed early.
+		}
 	} else {
 		println!("Usage `{} str`", std::env::args().next().unwrap());
 		println!("Pass --help for more info");
 	}
 }
 
-fn calculate(s: &str) {
+pub fn calculate<W: Write>(s: &str, mut ofs: &mut W) -> Result<()> {
 	let mut group = UnicodeSegmentation::graphemes(s, true).collect::<Vec<&str>>();
 	let mut rand = thread_rng();
 
@@ -31,10 +33,12 @@ fn calculate(s: &str) {
 		let permut = group.iter().copied().collect::<String>();
 
 		if !permutations.contains(&permut) {
-			println!("{}", permut);
+			writeln!(&mut ofs, "{}", permut)?;
 			permutations.insert(permut);
 		}
 	}
+
+	Ok(())
 }
 
 fn factorial(n: usize) -> usize {

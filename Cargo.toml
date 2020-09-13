@@ -1,6 +1,6 @@
 [package]
 name = "gen_perms"
-version = "0.1.0"
+version = "1.0.0"
 authors = ["MisterEggnog <12803156+MisterEggnog@users.noreply.github.com>"]
 edition = "2018"
 

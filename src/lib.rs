@@ -11,12 +11,14 @@ pub fn cal_perms() {
 	if let Some(s) = std::env::args().nth(1) {
 		if s == "--help" {
 			println!("Pass string to get all permutations.");
-			println!("You may want to check if these permutations would be a reasonable size,\ncurrently these produce n! strings, where n is the length of the string.");
-			println!("Note, currently all characters must be distinct.");
+			println!("This will generate n! / m1!m2!...mn! permutations");
+			println!("Where n is the length of the string & mx is the number of times that number repeats.");
+			println!("For example, the word `tree` would have 4!/2!, (simplifying the 1! operations)");
+			println!("This can get large quickly.");
 			return;
 		}
 		if let Err(_e) = calculate(&s, &mut io::stdout()) {
-			// It is not an error if the stdout is closed early.
+			// It is not an error if stdout is closed early.
 		}
 	} else {
 		println!("Usage `{} str`", std::env::args().next().unwrap());

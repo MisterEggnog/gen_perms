@@ -12,4 +12,4 @@ This can get large quickly.
 This is licensed under GPL V3.0
 
 ## Author
-The author is Baldwin, "MisterEggnog" Josiah.
+The author is Baldwin, Josiah.

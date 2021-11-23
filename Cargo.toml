@@ -2,7 +2,7 @@
 name = "gen_perms"
 version = "1.0.0"
 authors = ["MisterEggnog <12803156+MisterEggnog@users.noreply.github.com>"]
-edition = "2018"
+edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
